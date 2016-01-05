@@ -1,27 +1,64 @@
 package com.core;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.core.game.Game;
+import com.core.graphics.ScreenManager;
 
-public class SpacePanda extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
+/**
+ *
+ * @author Pontus Wirsching
+ * @author Austin Wrenn
+ */
+public class SpacePanda implements ApplicationListener {
+
+	public static final float SCALE = 4;
+	public static final float WIDTH = 1080 / SCALE;
+	public static final float HEIGHT = 1920 / SCALE;
+
+	public static enum OS {
+		WINDOWS, ANDROID, IOS
+	}
+
+	public static OS currentOS = OS.WINDOWS;
+
+	public static boolean RUN_GAME = true;
 	
 	@Override
-	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+	public void create() {
+
+		ScreenManager.add(new Game());
+
+		ScreenManager.setSelected("GAME");
+
+//		Gdx.input.setInputProcessor(new Input());
+	}
+
+
+	@Override
+	public void render() {
+//		Input.update();
+		ScreenManager.render(Gdx.graphics.getDeltaTime());
 	}
 
 	@Override
-	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+	public void resize(int width, int height) {
+		ScreenManager.resize(width, height);
 	}
+
+	@Override
+	public void pause() {
+
+	}
+
+	@Override
+	public void resume() {
+
+	}
+
+	@Override
+	public void dispose() {
+
+	}
+
 }
