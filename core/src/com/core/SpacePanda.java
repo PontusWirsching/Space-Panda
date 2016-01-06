@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.core.game.Game;
 import com.core.graphics.ScreenManager;
+import com.core.resources.Resources;
 
 /**
  *
@@ -26,6 +27,8 @@ public class SpacePanda implements ApplicationListener {
 	
 	@Override
 	public void create() {
+		
+		Resources.load();
 
 		ScreenManager.add(new Game());
 

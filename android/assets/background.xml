@@ -1,0 +1,25 @@
+<SpriteSheet>
+
+	<!-- General sky background -->    
+	<Sprite name="game:background:sky_1" x="0" y="0" width="270" height="480"></Sprite>
+	<Sprite name="game:background:sky_2" x="270" y="0" width="270" height="480"></Sprite>
+	<Sprite name="game:background:sky_3" x="540" y="0" width="270" height="480"></Sprite>
+
+	<!-- Trees Background (First one) -->
+	<Sprite name="game:background:trees_back" x="0" y="480" width="270" height="480"></Sprite>
+	<Sprite name="game:background:trees_1" x="270" y="480" width="270" height="480"></Sprite>
+	<Sprite name="game:background:trees_2" x="540" y="480" width="270" height="480"></Sprite>
+	<Sprite name="game:background:trees_3" x="810" y="480" width="270" height="480"></Sprite>
+
+	<!-- Mountain Background (Second one) -->
+	<Sprite name="game:background:mountain_back" x="0" y="960" width="270" height="480"></Sprite>
+	<Sprite name="game:background:mountain_front" x="270" y="960" width="270" height="480"></Sprite>
+	<Sprite name="game:background:mountain_grass_1" x="540" y="960" width="270" height="480"></Sprite>
+	<Sprite name="game:background:mountain_grass_2" x="810" y="960" width="270" height="480"></Sprite>
+	<Sprite name="game:background:mountain_small_clouds" x="1080" y="960" width="270" height="480"></Sprite>
+	<Sprite name="game:background:mountain_grass_3" x="1350" y="960" width="270" height="480"></Sprite>
+	<Sprite name="game:background:mountain_snow" x="1620" y="960" width="270" height="480"></Sprite>
+	<Sprite name="game:background:mountain_clouds" x="1890" y="960" width="270" height="480"></Sprite>
+
+
+</SpriteSheet>
