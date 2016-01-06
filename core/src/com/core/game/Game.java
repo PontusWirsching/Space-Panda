@@ -1,6 +1,7 @@
 package com.core.game;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.core.SpacePanda;
 import com.core.graphics.Screen;
 import com.core.resources.Resources;
 
@@ -59,6 +60,16 @@ public class Game extends Screen {
 			sb.draw(Resources.get("game:background:trees_1"), -270 * treesSize / 2 + i * 270 * treesSize + offsetValues[3], -h / 2 + y, 270 * treesSize, h* treesSize);
 			sb.draw(Resources.get("game:background:trees_2"), -270 * treesSize / 2 + i * 270 * treesSize + offsetValues[4], -h / 2 + y, 270 * treesSize, h* treesSize);
 			sb.draw(Resources.get("game:background:trees_3"), -270 * treesSize / 2 + i * 270 * treesSize + offsetValues[5], -h / 2 + y, 270 * treesSize, h* treesSize);
+			//the width of the object will scale to that. so simply use the same values as the texture width and height
+			// cus i draw the textures so they fit. is 0,0 the bottom left then?  yes bottom left of the sprite but centered on the screen.
+			//now we got it centered on the screen
+			sb.draw(Resources.get("game:object:bamboo_1"), 0, -240, 27, 480);
+			sb.draw(Resources.get("game:object:bamboo_1"), -13.5f - SpacePanda.WIDTH * 1 / 3, -240, 27, 480);
+			sb.draw(Resources.get("game:object:bamboo_1"), -13.5f + SpacePanda.WIDTH * 1 / 3, -240, 27, 480);
+
+			//sb.draw(Resources.get("game:object:bamboo_2"), -100, speedDevider, 0, 0, 10, 10, 5, 5, 0);
+			//sb.draw(Resources.get("game:object:bamboo_3"), 20, speedDevider, 0, 0, 10, 10, 5, 5, 0);
+			
 		}
 
 		sb.end();

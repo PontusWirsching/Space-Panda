@@ -14,7 +14,7 @@ import com.core.resources.Resources;
 public class SpacePanda implements ApplicationListener {
 
 	public static final float SCALE = 4;
-	public static final float WIDTH = 1080 / SCALE;
+	public static final float WIDTH = 1080 / SCALE; // This won\t change during the game so we use this.
 	public static final float HEIGHT = 1920 / SCALE;
 
 	public static enum OS {

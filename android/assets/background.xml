@@ -22,6 +22,7 @@
 	<Sprite name="game:background:mountain_clouds" x="1890" y="960" width="270" height="480"></Sprite>
 
 	<!-- Bamboo shoot, wouldn't really be in here later on. -->
-	<Sprite name="game:object:bamboo" x="837" y="0" width="27" height="480"></Sprite>
+	<Sprite name="game:object:bamboo_1" x="837" y="0" width="27" height="480"></Sprite>
+	
 
 </SpriteSheet>
