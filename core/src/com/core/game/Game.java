@@ -53,23 +53,11 @@ public class Game extends Screen {
 
 		for (int i = -ww / 2 - 1; i < ww / 2 + 2; i++) {
 			sb.draw(Resources.get("game:background:sky_1"), -270 * treesSize / 2 + i * 270 * treesSize, -h / 2 + y, 270 * treesSize, h* treesSize);
-		}
-		for (int i = -ww / 2 - 1; i < ww / 2 + 2; i++) {
 			sb.draw(Resources.get("game:background:sky_2"), -270 * treesSize / 2 + i * 270 * treesSize + offsetValues[0], -h / 2 + y, 270 * treesSize, h* treesSize);
-		}
-		for (int i = -ww / 2 - 1; i < ww / 2 + 2; i++) {
 			sb.draw(Resources.get("game:background:sky_3"), -270 * treesSize / 2 + i * 270 * treesSize + offsetValues[1], -h / 2 + y, 270 * treesSize, h* treesSize);
-		}
-		for (int i = -ww / 2 - 1; i < ww / 2 + 2; i++) {
 			sb.draw(Resources.get("game:background:trees_back"), -270 * treesSize / 2 + i * 270 * treesSize + offsetValues[2], -h / 2 + y, 270 * treesSize, h* treesSize);
-		}
-		for (int i = -ww / 2 - 1; i < ww / 2 + 2; i++) {
 			sb.draw(Resources.get("game:background:trees_1"), -270 * treesSize / 2 + i * 270 * treesSize + offsetValues[3], -h / 2 + y, 270 * treesSize, h* treesSize);
-		}
-		for (int i = -ww / 2 - 1; i < ww / 2 + 2; i++) {
 			sb.draw(Resources.get("game:background:trees_2"), -270 * treesSize / 2 + i * 270 * treesSize + offsetValues[4], -h / 2 + y, 270 * treesSize, h* treesSize);
-		}
-		for (int i = -ww / 2 - 1; i < ww / 2 + 2; i++) {
 			sb.draw(Resources.get("game:background:trees_3"), -270 * treesSize / 2 + i * 270 * treesSize + offsetValues[5], -h / 2 + y, 270 * treesSize, h* treesSize);
 		}
 
