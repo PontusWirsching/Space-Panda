@@ -18,14 +18,14 @@ public class Game extends Screen {
 
 	float[] offsetValues = new float[6];
 
-	float runtime = 0;
-	
+	float runtime = 1;
+
 	float y = 0;
-	
+	float bambooLooping = 0;
+
 	@Override
 	public void render(float delta) {
 		super.render(delta);
-		runtime+=delta;
 
 		sb.begin();
 
@@ -34,43 +34,99 @@ public class Game extends Screen {
 
 		float speedDevider = 5;
 
-//		offsetValues[0] += delta * 10 / speedDevider;
-//		offsetValues[1] += delta * 20 / speedDevider;
-//		offsetValues[2] += delta * 25 / speedDevider;
-//		offsetValues[3] += delta * 30 / speedDevider;
-//		offsetValues[4] += delta * 40 / speedDevider;
-//		offsetValues[5] += delta * 50 / speedDevider;
-		
-		y -= delta * 10;
+		y += 100 * delta;
+		bambooLooping += 100 * delta;
 
-		float treesSize = 4 - runtime / 10;
+		if (bambooLooping > SpacePanda.HEIGHT)
+			bambooLooping = 0;
 
-		int ww = (int) (w / (270 * treesSize));
+		float scale = 4 - (runtime / (1000));
+		runtime += ((delta / 10 + 1) * scale);
+
+System.out.println(scale + " . " + ((delta / 10 + 1) * scale));
+//		scale = 1;
+
+		int ww = (int) (w / (270 * scale));
 
 		for (int i = 0; i < offsetValues.length; i++) {
-			if (offsetValues[i] > 270 * treesSize)
+			if (offsetValues[i] > 270 * scale)
 				offsetValues[i] = 0;
 		}
+		float backgroundSpeed = 30;
 
+		float preScale = scale;
+		scale = 1;
+		ww = (int) (w / (270 * scale));
 		for (int i = -ww / 2 - 1; i < ww / 2 + 2; i++) {
-			sb.draw(Resources.get("game:background:sky_1"), -270 * treesSize / 2 + i * 270 * treesSize, -h / 2 + y, 270 * treesSize, h* treesSize);
-			sb.draw(Resources.get("game:background:sky_2"), -270 * treesSize / 2 + i * 270 * treesSize + offsetValues[0], -h / 2 + y, 270 * treesSize, h* treesSize);
-			sb.draw(Resources.get("game:background:sky_3"), -270 * treesSize / 2 + i * 270 * treesSize + offsetValues[1], -h / 2 + y, 270 * treesSize, h* treesSize);
-			sb.draw(Resources.get("game:background:trees_back"), -270 * treesSize / 2 + i * 270 * treesSize + offsetValues[2], -h / 2 + y, 270 * treesSize, h* treesSize);
-			sb.draw(Resources.get("game:background:trees_1"), -270 * treesSize / 2 + i * 270 * treesSize + offsetValues[3], -h / 2 + y, 270 * treesSize, h* treesSize);
-			sb.draw(Resources.get("game:background:trees_2"), -270 * treesSize / 2 + i * 270 * treesSize + offsetValues[4], -h / 2 + y, 270 * treesSize, h* treesSize);
-			sb.draw(Resources.get("game:background:trees_3"), -270 * treesSize / 2 + i * 270 * treesSize + offsetValues[5], -h / 2 + y, 270 * treesSize, h* treesSize);
-			//the width of the object will scale to that. so simply use the same values as the texture width and height
-			// cus i draw the textures so they fit. is 0,0 the bottom left then?  yes bottom left of the sprite but centered on the screen.
-			//now we got it centered on the screen
-			sb.draw(Resources.get("game:object:bamboo_1"), 0, -240, 27, 480);
-			sb.draw(Resources.get("game:object:bamboo_1"), -13.5f - SpacePanda.WIDTH * 1 / 3, -240, 27, 480);
-			sb.draw(Resources.get("game:object:bamboo_1"), -13.5f + SpacePanda.WIDTH * 1 / 3, -240, 27, 480);
-
-			//sb.draw(Resources.get("game:object:bamboo_2"), -100, speedDevider, 0, 0, 10, 10, 5, 5, 0);
-			//sb.draw(Resources.get("game:object:bamboo_3"), 20, speedDevider, 0, 0, 10, 10, 5, 5, 0);
-			
+			sb.draw(Resources.get("game:background:sky_1"), -270 * scale / 2 + i * 270 * scale, -h / 2, 270 * scale, h * scale);
+			sb.draw(Resources.get("game:background:sky_2"), -270 * scale / 2 + i * 270 * scale + offsetValues[0], -h / 2, 270 * scale, h * scale);
+			sb.draw(Resources.get("game:background:sky_3"), -270 * scale / 2 + i * 270 * scale + offsetValues[1], -h / 2, 270 * scale, h * scale);
 		}
+		scale = preScale;
+		
+		scale *= 3;
+
+		
+		float x = -135 * scale;
+		float yy = -240 - y / backgroundSpeed / 1.5f;
+		sb.draw(Resources.get("game:background:mountain_back"), x, yy, 270 * scale, h * scale);
+		sb.draw(Resources.get("game:background:mountain_front"), x, yy, 270 * scale, h * scale);
+		sb.draw(Resources.get("game:background:mountain_grass_1"), x, yy, 270 * scale, h * scale);
+		sb.draw(Resources.get("game:background:mountain_grass_2"), x, yy, 270 * scale, h * scale);
+		sb.draw(Resources.get("game:background:mountain_snow"), x, yy, 270 * scale, h * scale);
+		
+		ww = (int) (w / (270 * scale));
+		for (int i = -ww / 2 - 1; i < ww / 2 + 2; i++) {
+			float xx = -135 * scale + i * 270 * scale;
+			float yyy = -240 - y / backgroundSpeed / 1.5f;
+			sb.draw(Resources.get("game:background:mountain_small_clouds"), xx, yyy, 270 * scale, h * scale);
+			sb.draw(Resources.get("game:background:mountain_grass_3"), xx, yyy, 270 * scale, h * scale);
+			sb.draw(Resources.get("game:background:mountain_clouds"), xx, yyy, 270 * scale, h * scale);
+
+		}
+		
+		scale /= 3;
+		
+		ww = (int) (w / (270 * scale));
+		for (int i = -ww / 2 - 1; i < ww / 2 + 2; i++) {
+			// sb.draw(Resources.get("game:background:sky_1"), -270 * scale / 2
+			// + i * 270 * scale, -h / 2 - y / backgroundSpeed, 270 * scale, h *
+			// scale);
+			// sb.draw(Resources.get("game:background:sky_2"), -270 * scale / 2
+			// + i * 270 * scale + offsetValues[0], -h / 2 - y /
+			// backgroundSpeed, 270 * scale, h * scale);
+			// sb.draw(Resources.get("game:background:sky_3"), -270 * scale / 2
+			// + i * 270 * scale + offsetValues[1], -h / 2 - y /
+			// backgroundSpeed, 270 * scale, h * scale);
+			sb.draw(Resources.get("game:background:trees_back"), -270 * scale / 2 + i * 270 * scale + offsetValues[2], -h / 2 - y / backgroundSpeed, 270 * scale, h * scale);
+			sb.draw(Resources.get("game:background:trees_1"), -270 * scale / 2 + i * 270 * scale + offsetValues[3], -h / 2 - y / backgroundSpeed, 270 * scale, h * scale);
+			sb.draw(Resources.get("game:background:trees_2"), -270 * scale / 2 + i * 270 * scale + offsetValues[4], -h / 2 - y / backgroundSpeed, 270 * scale, h * scale);
+			sb.draw(Resources.get("game:background:trees_3"), -270 * scale / 2 + i * 270 * scale + offsetValues[5], -h / 2 - y / backgroundSpeed, 270 * scale, h * scale);
+		}
+
+//		scale = 2;
+
+		
+		
+		
+
+		// Hi! I moved the bamboo code outside that for loop as
+		// that for loop is only for the looping background
+
+		// the width of the object will scale to that. so simply use the same
+		// values as the texture width and height
+		// cus i draw the textures so they fit. is 0,0 the bottom left then? yes
+		// bottom left of the sprite but centered on the screen.
+		// now we got it centered on the screen
+
+		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f, -240 - bambooLooping, 27, 480);
+		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f, 240 - bambooLooping, 27, 480);
+
+		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f - SpacePanda.WIDTH * 1 / 3, -240 - bambooLooping, 27, 480);
+		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f - SpacePanda.WIDTH * 1 / 3, 240 - bambooLooping, 27, 480);
+
+		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f + SpacePanda.WIDTH * 1 / 3, -240 - bambooLooping, 27, 480);
+		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f + SpacePanda.WIDTH * 1 / 3, 240 - bambooLooping, 27, 480);
 
 		sb.end();
 
