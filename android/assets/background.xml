@@ -23,6 +23,7 @@
 
 	<!-- Bamboo shoot, wouldn't really be in here later on. -->
 	<Sprite name="game:object:bamboo_1" x="810" y="0" width="27" height="480"></Sprite>
+	<Sprite name="game:object:bamboo_2" x="810" y="0" width="27" height="480"></Sprite>
 	
 
 </SpriteSheet>

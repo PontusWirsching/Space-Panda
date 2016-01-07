@@ -1,11 +1,13 @@
 package com.core.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.core.Input;
 import com.core.SpacePanda;
 import com.core.graphics.Screen;
 import com.core.resources.Resources;
 
-public class Game extends Screen {
+public class Game extends Screen  {
 
 	public Game() {
 		super("GAME");
@@ -26,6 +28,8 @@ public class Game extends Screen {
 	@Override
 	public void render(float delta) {
 		super.render(delta);
+		
+		Gdx.input.setInputProcessor(new Input());
 
 		sb.begin();
 
@@ -43,7 +47,7 @@ public class Game extends Screen {
 		float scale = 4 - (runtime / (1000));
 		runtime += ((delta / 10 + 1) * scale);
 
-System.out.println(scale + " . " + ((delta / 10 + 1) * scale));
+//System.out.println(scale + " . " + ((delta / 10 + 1) * scale));
 //		scale = 1;
 
 		int ww = (int) (w / (270 * scale));
@@ -107,7 +111,7 @@ System.out.println(scale + " . " + ((delta / 10 + 1) * scale));
 //		scale = 2;
 
 		
-		
+//		System.out.println(Input.getSwipe());
 		
 
 		// Hi! I moved the bamboo code outside that for loop as
@@ -116,7 +120,7 @@ System.out.println(scale + " . " + ((delta / 10 + 1) * scale));
 		// the width of the object will scale to that. so simply use the same
 		// values as the texture width and height
 		// cus i draw the textures so they fit. is 0,0 the bottom left then? yes
-		// bottom left of the sprite but centered on the screen.
+		// bottom left of the sprite but centered on the screen. 
 		// now we got it centered on the screen
 
 		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f, -240 - bambooLooping, 27, 480);
@@ -128,8 +132,15 @@ System.out.println(scale + " . " + ((delta / 10 + 1) * scale));
 		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f + SpacePanda.WIDTH * 1 / 3, -240 - bambooLooping, 27, 480);
 		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f + SpacePanda.WIDTH * 1 / 3, 240 - bambooLooping, 27, 480);
 
+		
+//		fling(float dX, dY, int arg3 ){
+//			if(dX  > 2 || dY > 2){
+//				//Locate panda graphic on x-coordinate of the bamboo
+//			}
+//		}
+		
+		
 		sb.end();
 
-	}
-
+	} 
 }
