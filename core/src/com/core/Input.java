@@ -17,6 +17,8 @@ public class Input implements InputProcessor {
 
 	static float x, y;
 	
+	static boolean touched = false;
+	
 	private static SwipeInterface s;
 	
 	public static void setSwipeInterface(SwipeInterface ss) {
@@ -39,6 +41,10 @@ public class Input implements InputProcessor {
 
 	public static float getY() {
 		return y;
+	}
+	
+	public static boolean isTouched() {
+		return touched;
 	}
 
 	@Override
@@ -74,10 +80,9 @@ public class Input implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		// This method is looping when we hold our finger / mouse down, using that boolean it will set the start and then prevent the if statment to run again.
 		touchTime = 0;
 		start = System.currentTimeMillis();
-
+		touched = true;
 		startPos = new Point((int) getX(), (int) getY());
 		
 		return false;
@@ -85,21 +90,17 @@ public class Input implements InputProcessor {
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		// nevermind, wait shouldn't we be setting the endPos or the startPos to the value screenX and screenY?
-		// good question but no, the getX() and getY() is custom written to integrate the touch with the camera.
-		// The screenX and screenY works in some cases but will get weird when you scale the window etc.
-		// what is the int button? What button you pressed.
 		endPos = new Point((int) getX(), (int) getY());
 		swipe = new Vector2(endPos.x - startPos.x, endPos.y - startPos.y);
 		if (s != null){
 			s.swiped(swipe);
 		}
+		touched = false;
 		end = System.currentTimeMillis();
 		touchTime = end - start;
 		return false;
 	}
 
-	// Gets the time of the last touch. Very useful.k
 	public static boolean lastTouchWas(long ms) {
 		if (touchTime > ms) {
 			touchTime = 0;
