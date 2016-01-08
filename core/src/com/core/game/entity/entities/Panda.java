@@ -3,11 +3,9 @@ package com.core.game.entity.entities;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
-import com.core.Input;
 import com.core.SpacePanda;
-import com.core.SwipeInterface;
 import com.core.game.entity.Entity;
+import com.core.game.entity.EntityType;
 import com.core.resources.Resources;
 
 public class Panda extends Entity {
@@ -19,7 +17,7 @@ public class Panda extends Entity {
 
 	public Panda(float x, float y, float width, float height) {
 		super(x, y, width, height);
-
+		type = EntityType.PLAYER;
 
 		t = Resources.loadSheet("Entities/Panda/climb.png", 404, 404);
 		// climb = new Animation(1f / 120f, t);
@@ -37,7 +35,7 @@ public class Panda extends Entity {
 	@Override
 	public void render(SpriteBatch batch, float delta) {
 
-		;
+		
 		speed = 425;
 
 		bounds.width = (404 / 4);

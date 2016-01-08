@@ -14,7 +14,7 @@ import com.core.resources.Resources;
 public class Game extends Screen {
 
 	public static Panda panda;
-
+	
 	public Game() {
 		super("GAME");
 
