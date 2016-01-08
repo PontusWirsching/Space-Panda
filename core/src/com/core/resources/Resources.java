@@ -19,7 +19,8 @@ public class Resources {
 
 	/**
 	 * Mostly unused as we load all assets through .xml files. <br>
-	 * Though in here you can put stuff like loadAnimation() and other load methods. <br>
+	 * Though in here you can put stuff like loadAnimation() and other load
+	 * methods. <br>
 	 * This method is called from the SpacePanda create() method. <br>
 	 * 
 	 * @author Pontus Wirsching
@@ -30,7 +31,8 @@ public class Resources {
 
 	/**
 	 * This is a HashMap containing all loaded Textures. <br>
-	 * This should not really be accessed directly as there's utility methods for <br>
+	 * This should not really be accessed directly as there's utility methods
+	 * for <br>
 	 * receiving Textures. <br>
 	 *
 	 * @author Pontus Wirsching
@@ -39,7 +41,8 @@ public class Resources {
 	public static HashMap<String, TextureRegion> textures = new HashMap<String, TextureRegion>();
 
 	/**
-	 * @param key - Name of the texture.
+	 * @param key
+	 *            - Name of the texture.
 	 * @return A TextureRegion based on its name. <br>
 	 * 
 	 * @author Pontus Wirsching
@@ -49,8 +52,6 @@ public class Resources {
 		return textures.get(key);
 	}
 
-	
-	
 	/**
 	 * When loading a Sprite Sheet you use the relative path <br>
 	 * relative to the assets folder. <br>
@@ -58,6 +59,7 @@ public class Resources {
 	 * The image file (.png) and the data file (.xml) must have the same name <br>
 	 * and be placed in the same folder. <br>
 	 * <br>
+	 * 
 	 * <pre>
 	 * So as an example: <br>
 	 * assets
@@ -67,6 +69,7 @@ public class Resources {
 	 *   	   |- textures.png <-- "Image file" (must be .png)
 	 *   	   |- textures.xml <-- "Data file" (must be .xml)
 	 * </pre>
+	 * 
 	 * So to load the "textures" sheet you would use the path: <br>
 	 * "Textures/textures", notice that there's no extension here. <br>
 	 * <br>
@@ -76,7 +79,8 @@ public class Resources {
 	 * @author Pontus Wirsching
 	 * @since 2016-01-05
 	 * 
-	 * @param path - Relative path of the texture sheet. <br>
+	 * @param path
+	 *            - Relative path of the texture sheet. <br>
 	 */
 	public static void loadSheet(String path) {
 		try {
@@ -87,9 +91,9 @@ public class Resources {
 
 			XmlReader reader = new XmlReader();
 			Element root = reader.parse(Gdx.files.internal(data));
-			
+
 			Array<Element> items = root.getChildrenByName("Sprite");
-			
+
 			for (Element e : items) {
 				String name = e.get("name");
 				int x = Integer.parseInt(e.get("x"));
@@ -105,9 +109,43 @@ public class Resources {
 	}
 
 	/**
+	 * Loads a spritesheet using tile width and height. Useful for animations.
+	 * 
+	 * @param path
+	 *            - Path to the .png file (file extension is not needed)
+	 * @param tileWidth
+	 *            - how big each tile is.
+	 * @param tileHeight
+	 *            - how big each tile is.
+	 */
+	public static TextureRegion[] loadSheet(String path, int tileWidth, int tileHeight) {
+		path = path.replace(".png", "");
+		String image = path + ".png";
+		Texture t = new Texture(image);
+
+		int w = t.getWidth() / tileWidth;
+		int h = t.getHeight() / tileHeight;
+
+		TextureRegion[] tiles = new TextureRegion[w * h];
+
+		for (int y = 0; y < h; y++) {
+			for (int x = 0; x < w; x++) {
+				System.out.println((x * tileWidth) + ", " + (y * tileHeight));
+				tiles[x + y * w] = new TextureRegion(t, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+			}
+		}
+
+		return tiles;
+	}
+
+	/**
 	 * Places a texture in the textures HashMap. <br>
-	 * @param key - The Name of the texture, this is later used to retrieve the texture.
-	 * @param texture - The TextureRegion to put in the HashMap.
+	 * 
+	 * @param key
+	 *            - The Name of the texture, this is later used to retrieve the
+	 *            texture.
+	 * @param texture
+	 *            - The TextureRegion to put in the HashMap.
 	 * 
 	 * @author Pontus Wirsching
 	 * @since 2016-01-05
@@ -119,8 +157,12 @@ public class Resources {
 	/**
 	 * Places a texture in the textures HashMap. <br>
 	 * This method also loads the texture.
-	 * @param key - The Name of the texture, this is later used to retrieve the texture.
-	 * @param path - The relative path to the texture.
+	 * 
+	 * @param key
+	 *            - The Name of the texture, this is later used to retrieve the
+	 *            texture.
+	 * @param path
+	 *            - The relative path to the texture.
 	 * 
 	 * @author Pontus Wirsching
 	 * @since 2016-01-05

@@ -1,12 +1,11 @@
 package com.core;
 
-import java.awt.Point;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.core.graphics.ScreenManager;
+import com.core.utils.Point;
 
 /**
  * Offsets the Gdx.input.getX(), to fit the camera.
@@ -17,6 +16,12 @@ import com.core.graphics.ScreenManager;
 public class Input implements InputProcessor {
 
 	static float x, y;
+	
+	private static SwipeInterface s;
+	
+	public static void setSwipeInterface(SwipeInterface ss) {
+		s = ss;
+	}
 
 	public static void update() {
 
@@ -55,8 +60,8 @@ public class Input implements InputProcessor {
 	long start = 0;
 	long end = 0;
 
-	Point startPos = new Point();
-	Point endPos = new Point();
+	public static Point startPos = new Point();
+	public static Point endPos = new Point();
 	static Vector2 swipe = new Vector2();
 
 	/**
@@ -86,7 +91,9 @@ public class Input implements InputProcessor {
 		// what is the int button? What button you pressed.
 		endPos = new Point((int) getX(), (int) getY());
 		swipe = new Vector2(endPos.x - startPos.x, endPos.y - startPos.y);
-		System.out.println("Touch Up");
+		if (s != null){
+			s.swiped(swipe);
+		}
 		end = System.currentTimeMillis();
 		touchTime = end - start;
 		return false;

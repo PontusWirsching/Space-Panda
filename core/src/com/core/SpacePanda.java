@@ -2,6 +2,7 @@ package com.core;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Rectangle;
 import com.core.game.Game;
 import com.core.graphics.ScreenManager;
 import com.core.resources.Resources;
@@ -17,6 +18,8 @@ public class SpacePanda implements ApplicationListener {
 	public static final float WIDTH = 1080 / SCALE; // This won\t change during the game so we use this.
 	public static final float HEIGHT = 1920 / SCALE;
 
+	public static Rectangle screenBounds = new Rectangle();
+	
 	public static enum OS {
 		WINDOWS, ANDROID, IOS
 	}
@@ -40,13 +43,16 @@ public class SpacePanda implements ApplicationListener {
 
 	@Override
 	public void render() {
-//		Input.update();
+		Input.update();
 		ScreenManager.render(Gdx.graphics.getDeltaTime());
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		ScreenManager.resize(width, height);
+		float w = ScreenManager.getSelected().camera.viewportWidth;
+		float h = ScreenManager.getSelected().camera.viewportHeight;
+		screenBounds = new Rectangle(-w / 2, -h / 2, w, h);
 	}
 
 	@Override

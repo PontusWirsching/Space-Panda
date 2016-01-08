@@ -1,9 +1,12 @@
 package com.core.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.core.Input;
 import com.core.SpacePanda;
+import com.core.SwipeInterface;
+import com.core.game.entity.EntityHandler;
+import com.core.game.entity.entities.Panda;
 import com.core.graphics.Screen;
 import com.core.resources.Resources;
 
@@ -13,10 +16,13 @@ public class Game extends Screen  {
 		super("GAME");
 
 		Resources.loadSheet("background");
+		
+		EntityHandler.add(new Panda(0, 0, 214, 328));
+		
+
+		
 
 	}
-
-	Texture t = new Texture("badlogic.jpg");
 
 	float[] offsetValues = new float[6];
 
@@ -46,6 +52,7 @@ public class Game extends Screen  {
 
 		float scale = 4 - (runtime / (1000));
 		runtime += ((delta / 10 + 1) * scale);
+//		runtime += delta * 30;
 
 //System.out.println(scale + " . " + ((delta / 10 + 1) * scale));
 //		scale = 1;
@@ -111,7 +118,13 @@ public class Game extends Screen  {
 //		scale = 2;
 
 		
-//		System.out.println(Input.getSwipe());
+		
+//		sb.draw(Resources.get("game:object:bamboo_1"), Input.startPos.x, Input.startPos.y, 50, 50);
+//		sb.draw(Resources.get("game:object:bamboo_1"), Input.endPos.x, Input.endPos.y, 50, 50);
+
+		
+		
+		
 		
 
 		// Hi! I moved the bamboo code outside that for loop as
@@ -132,13 +145,7 @@ public class Game extends Screen  {
 		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f + SpacePanda.WIDTH * 1 / 3, -240 - bambooLooping, 27, 480);
 		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f + SpacePanda.WIDTH * 1 / 3, 240 - bambooLooping, 27, 480);
 
-		
-//		fling(float dX, dY, int arg3 ){
-//			if(dX  > 2 || dY > 2){
-//				//Locate panda graphic on x-coordinate of the bamboo
-//			}
-//		}
-		
+		EntityHandler.render(sb, delta);
 		
 		sb.end();
 
