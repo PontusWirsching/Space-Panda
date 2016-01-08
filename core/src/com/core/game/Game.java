@@ -62,7 +62,7 @@ public class Game extends Screen  {
 		float speedDevider = 5;
 
 		y += 100 * delta;
-		bambooLooping += 100 * delta;
+		bambooLooping += 125 * delta;
 
 		if (bambooLooping > SpacePanda.HEIGHT)
 			bambooLooping = 0;
@@ -71,6 +71,7 @@ public class Game extends Screen  {
 		runtime += ((delta / 10 + 1) * scale);
 		
 		score = (runtime / 1000);
+		
 		gameScore = "Score: " + 100 *score;
 //		runtime += delta * 30;
 
