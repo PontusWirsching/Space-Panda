@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.core.SpacePanda;
+import com.core.game.Game;
 import com.core.game.entity.Entity;
 import com.core.game.entity.EntityType;
 import com.core.resources.Resources;
@@ -42,7 +43,7 @@ public class Panda extends Entity {
 		bounds.height = (404 / 4);
 
 		targetX = -bounds.width / 2 + (SpacePanda.WIDTH * 1 / 3) * spot;
-		bounds.y = -bounds.height / 2;
+		bounds.y = -bounds.height / 2 - (Game.height / 2) * 1/3;
 
 		if (targetX < bounds.x) {
 			bounds.x -= speed * delta;

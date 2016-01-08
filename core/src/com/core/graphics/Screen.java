@@ -49,7 +49,7 @@ public class Screen implements com.badlogic.gdx.Screen {
 		
 		//Initialize camera.
 		
-		System.out.println((w / h) + ", " + (SpacePanda.WIDTH / SpacePanda.HEIGHT));
+//		System.out.println((w / h) + ", " + (SpacePanda.WIDTH / SpacePanda.HEIGHT));
 		
 		if (w / h > SpacePanda.WIDTH / SpacePanda.HEIGHT) {
 			camera = new OrthographicCamera((SpacePanda.HEIGHT * (w / h) + 1) / 2 * 2, (SpacePanda.HEIGHT + 1) / 2 * 2);

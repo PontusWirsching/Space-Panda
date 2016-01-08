@@ -130,7 +130,6 @@ public class Resources {
 
 		for (int y = 0; y < h; y++) {
 			for (int x = 0; x < w; x++) {
-				System.out.println((x * tileWidth) + ", " + (y * tileHeight));
 				tiles[x + y * w] = new TextureRegion(t, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
 			}
 		}

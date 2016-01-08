@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.core.Input;
 import com.core.SpacePanda;
 import com.core.game.entity.EntityHandler;
+import com.core.game.entity.ObstacleSpawner;
 import com.core.game.entity.entities.Panda;
+import com.core.game.entity.entities.obstacles.Beetle;
 import com.core.graphics.Screen;
 import com.core.resources.Resources;
 
@@ -15,13 +17,33 @@ public class Game extends Screen {
 
 	public static Panda panda;
 	
+	public static int width = 0;
+	public static int height = 0;
+	
+	
+	/**
+	 * How many pixels the bamboo should move down every second.
+	 */
+	public static float speed = 125;
+	
 	public Game() {
 		super("GAME");
 
+		Game.width = (int) camera.viewportWidth;
+		Game.height = (int) camera.viewportHeight;
+		
+		
+		
+		Resources.put("game:obstacles:beetle", "Entities/Beetle/beetle.png");
+		
+		
+		
 		Resources.loadSheet("background");
 
 		EntityHandler.add(panda = new Panda(0, 0, 214, 328));
 
+		EntityHandler.add(new Beetle(-1));
+		
 	}
 
 	float[] offsetValues = new float[6];
@@ -37,6 +59,13 @@ public class Game extends Screen {
 	float bambooLooping = 0;
 
 	@Override
+	public void resize(int width, int height) {
+		super.resize(width, height);
+		Game.width = (int) camera.viewportWidth;
+		Game.height = (int) camera.viewportHeight;
+	}
+	
+	@Override
 	public void render(float delta) {
 		super.render(delta);
 
@@ -50,7 +79,7 @@ public class Game extends Screen {
 		float speedDevider = 5;
 
 		y += 100 * delta;
-		bambooLooping += 125 * delta;
+		bambooLooping += speed * delta;
 
 		if (bambooLooping > SpacePanda.HEIGHT)
 			bambooLooping = 0;
@@ -176,6 +205,8 @@ public class Game extends Screen {
 		bitFont.setColor(Color.YELLOW);
 		bitFont.draw(sb, s, 0 - l.width / 2, 230 - 10);
 
+		
+		ObstacleSpawner.update(delta);
 		EntityHandler.render(sb, delta);
 
 		sb.end();
