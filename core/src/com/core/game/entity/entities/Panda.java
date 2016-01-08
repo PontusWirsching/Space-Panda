@@ -54,7 +54,8 @@ public class Panda extends Entity {
 	@Override
 	public void render(SpriteBatch batch, float delta) {
 
-		speed = 275;
+		;
+		speed = 425;
 
 		bounds.width = (404 / 4);
 		bounds.height = (404 / 4);

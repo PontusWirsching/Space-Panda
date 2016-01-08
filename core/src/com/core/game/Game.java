@@ -1,6 +1,7 @@
 package com.core.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector2;
 import com.core.Input;
 import com.core.SpacePanda;
@@ -26,6 +27,12 @@ public class Game extends Screen  {
 
 	float[] offsetValues = new float[6];
 
+	//score/////////////////
+	float score = 0;
+	String gameScore;
+	BitmapFont bitFont;
+	/////////////////////////
+	
 	float runtime = 1;
 
 	float y = 0;
@@ -35,10 +42,20 @@ public class Game extends Screen  {
 	public void render(float delta) {
 		super.render(delta);
 		
+		
+		//// Intialize score ////
+		score = 0;
+		gameScore = "score: 0";
+		bitFont = new BitmapFont();
+		//////////////////////////////
+		
 		Gdx.input.setInputProcessor(new Input());
 
 		sb.begin();
 
+		
+				
+				
 		float w = camera.viewportWidth;
 		float h = camera.viewportHeight;
 
@@ -52,6 +69,9 @@ public class Game extends Screen  {
 
 		float scale = 4 - (runtime / (1000));
 		runtime += ((delta / 10 + 1) * scale);
+		
+		score = (runtime / 1000);
+		gameScore = "Score: " + 100 *score;
 //		runtime += delta * 30;
 
 //System.out.println(scale + " . " + ((delta / 10 + 1) * scale));
@@ -86,6 +106,7 @@ public class Game extends Screen  {
 		sb.draw(Resources.get("game:background:mountain_grass_2"), x, yy, 270 * scale, h * scale);
 		sb.draw(Resources.get("game:background:mountain_snow"), x, yy, 270 * scale, h * scale);
 		
+		
 		ww = (int) (w / (270 * scale));
 		for (int i = -ww / 2 - 1; i < ww / 2 + 2; i++) {
 			float xx = -135 * scale + i * 270 * scale;
@@ -93,7 +114,8 @@ public class Game extends Screen  {
 			sb.draw(Resources.get("game:background:mountain_small_clouds"), xx, yyy, 270 * scale, h * scale);
 			sb.draw(Resources.get("game:background:mountain_grass_3"), xx, yyy, 270 * scale, h * scale);
 			sb.draw(Resources.get("game:background:mountain_clouds"), xx, yyy, 270 * scale, h * scale);
-
+			bitFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+			
 		}
 		
 		scale /= 3;
@@ -144,7 +166,8 @@ public class Game extends Screen  {
 
 		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f + SpacePanda.WIDTH * 1 / 3, -240 - bambooLooping, 27, 480);
 		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f + SpacePanda.WIDTH * 1 / 3, 240 - bambooLooping, 27, 480);
-
+		
+		bitFont.draw(sb, gameScore, -70, 230);
 		EntityHandler.render(sb, delta);
 		
 		sb.end();
