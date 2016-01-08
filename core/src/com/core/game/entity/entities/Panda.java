@@ -13,30 +13,13 @@ import com.core.resources.Resources;
 public class Panda extends Entity {
 	TextureRegion[] t;
 
-	int spot = 0;
+	public int spot = 0;
 	float targetX = 0;
 	float speed = 50;
 
 	public Panda(float x, float y, float width, float height) {
 		super(x, y, width, height);
 
-		Input.setSwipeInterface(new SwipeInterface() {
-
-			@Override
-			public void swiped(Vector2 swipe) {
-				float angle = swipe.angle();
-				if ((angle >= 0 && angle <= 90) || (angle >= 270 && angle <= 360)) {
-					// This happens when you swipe right.if
-					if (spot < 1)
-						spot++;
-
-				} else {
-					// This happens when you swipe left.
-					if (spot > -1)
-						spot--;
-				}
-			}
-		});
 
 		t = Resources.loadSheet("Entities/Panda/climb.png", 404, 404);
 		// climb = new Animation(1f / 120f, t);
