@@ -5,7 +5,7 @@ import com.core.game.entity.entities.obstacles.Beetle;
 
 public class ObstacleSpawner {
 
-	public static float BEETLE_SPAWNRATE = 0.5f;
+	public static float BEETLE_SPAWNRATE = 2.2f;
 	
 	
 	

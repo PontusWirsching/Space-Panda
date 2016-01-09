@@ -6,7 +6,7 @@ import com.core.resources.Resources;
 public class Beetle extends Obstacle {
 
 	public Beetle(int bambooSpot) {
-		super(bambooSpot, 50, 50);
+		super(bambooSpot, 39, 39);
 		texture = Resources.get("game:obstacles:beetle");
 	}
 

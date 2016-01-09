@@ -39,8 +39,8 @@ public class Panda extends Entity {
 		
 		speed = 425;
 
-		bounds.width = (404 / 4);
-		bounds.height = (404 / 4);
+		bounds.width = (404 / 5);
+		bounds.height = (404 / 5);
 
 		targetX = -bounds.width / 2 + (SpacePanda.WIDTH * 1 / 3) * spot;
 		bounds.y = -bounds.height / 2 - (Game.height / 2) * 1/3;

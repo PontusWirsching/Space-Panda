@@ -24,7 +24,7 @@ public class Game extends Screen {
 	/**
 	 * How many pixels the bamboo should move down every second.
 	 */
-	public static float speed = 125;
+	public static float speed = 480;
 	
 	public Game() {
 		super("GAME");
@@ -168,14 +168,14 @@ public class Game extends Screen {
 		// bottom left of the sprite but centered on the screen.
 		// now we got it centered on the screen
 
-		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f, -240 - bambooLooping, 27, 480);
-		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f, 240 - bambooLooping, 27, 480);
+		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f, -240 - bambooLooping, 21, 480);
+		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f, 240 - bambooLooping, 21, 480);
 
-		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f - SpacePanda.WIDTH * 1 / 3, -240 - bambooLooping, 27, 480);
-		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f - SpacePanda.WIDTH * 1 / 3, 240 - bambooLooping, 27, 480);
+		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f - SpacePanda.WIDTH * 1 / 3, -240 - bambooLooping, 21, 480);
+		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f - SpacePanda.WIDTH * 1 / 3, 240 - bambooLooping, 21, 480);
 
-		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f + SpacePanda.WIDTH * 1 / 3, -240 - bambooLooping, 27, 480);
-		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f + SpacePanda.WIDTH * 1 / 3, 240 - bambooLooping, 27, 480);
+		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f + SpacePanda.WIDTH * 1 / 3, -240 - bambooLooping, 21, 480);
+		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f + SpacePanda.WIDTH * 1 / 3, 240 - bambooLooping, 21, 480);
 
 		panda.spot = 0;
 		if (Input.isTouched()) {
