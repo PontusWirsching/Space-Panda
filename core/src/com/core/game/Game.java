@@ -11,47 +11,52 @@ import com.core.game.entity.ObstacleSpawner;
 import com.core.game.entity.entities.Panda;
 import com.core.game.entity.entities.obstacles.Beetle;
 import com.core.graphics.Screen;
+import com.core.graphics.ScreenManager;
 import com.core.resources.Resources;
 
 public class Game extends Screen {
 
 	public static Panda panda;
-	
+
 	public static int width = 0;
 	public static int height = 0;
-	
-	
+
 	/**
 	 * How many pixels the bamboo should move down every second.
 	 */
 	public static float speed = 480;
-	
+
 	public Game() {
+
 		super("GAME");
 
 		Game.width = (int) camera.viewportWidth;
 		Game.height = (int) camera.viewportHeight;
-		
-		
-		
+
+		score = Game.getScore();
 		Resources.put("game:obstacles:beetle", "Entities/Beetle/beetle.png");
-		
-		
-		
+
 		Resources.loadSheet("background");
 
 		EntityHandler.add(panda = new Panda(0, 0, 214, 328));
 
 		EntityHandler.add(new Beetle(-1));
-		
+
 	}
 
 	float[] offsetValues = new float[6];
 
 	// score/////////////////
-	float score = 0;
+	public static float score = 0;
+
 	BitmapFont bitFont = new BitmapFont();
+
 	// ///////////////////////
+
+	// yeah this is correct
+	public static int getScore() {
+		return (int) score;
+	}
 
 	float runtime = 1;
 
@@ -64,7 +69,7 @@ public class Game extends Screen {
 		Game.width = (int) camera.viewportWidth;
 		Game.height = (int) camera.viewportHeight;
 	}
-	
+
 	@Override
 	public void render(float delta) {
 		super.render(delta);
@@ -87,8 +92,14 @@ public class Game extends Screen {
 		float scale = 4 - (runtime / (1000));
 		runtime += ((delta / 10 + 1) * scale);
 
-
 		score += delta * 10;
+
+		if (score > 50) {
+			ScreenManager.setSelected("GAMEOVER");
+		} else {
+			ScreenManager.setSelected("GAME");
+		}
+
 		// runtime += delta * 30;
 
 		// System.out.println(scale + " . " + ((delta / 10 + 1) * scale));
@@ -106,9 +117,14 @@ public class Game extends Screen {
 		scale = 1;
 		ww = (int) (w / (270 * scale));
 		for (int i = -ww / 2 - 1; i < ww / 2 + 2; i++) {
-			sb.draw(Resources.get("game:background:sky_1"), -270 * scale / 2 + i * 270 * scale, -h / 2, 270 * scale, h * scale);
-			sb.draw(Resources.get("game:background:sky_2"), -270 * scale / 2 + i * 270 * scale + offsetValues[0], -h / 2, 270 * scale, h * scale);
-			sb.draw(Resources.get("game:background:sky_3"), -270 * scale / 2 + i * 270 * scale + offsetValues[1], -h / 2, 270 * scale, h * scale);
+			sb.draw(Resources.get("game:background:sky_1"), -270 * scale / 2
+					+ i * 270 * scale, -h / 2, 270 * scale, h * scale);
+			sb.draw(Resources.get("game:background:sky_2"), -270 * scale / 2
+					+ i * 270 * scale + offsetValues[0], -h / 2, 270 * scale, h
+					* scale);
+			sb.draw(Resources.get("game:background:sky_3"), -270 * scale / 2
+					+ i * 270 * scale + offsetValues[1], -h / 2, 270 * scale, h
+					* scale);
 		}
 		scale = preScale;
 
@@ -116,19 +132,27 @@ public class Game extends Screen {
 
 		float x = -135 * scale;
 		float yy = -240 - y / backgroundSpeed / 1.5f;
-		sb.draw(Resources.get("game:background:mountain_back"), x, yy, 270 * scale, h * scale);
-		sb.draw(Resources.get("game:background:mountain_front"), x, yy, 270 * scale, h * scale);
-		sb.draw(Resources.get("game:background:mountain_grass_1"), x, yy, 270 * scale, h * scale);
-		sb.draw(Resources.get("game:background:mountain_grass_2"), x, yy, 270 * scale, h * scale);
-		sb.draw(Resources.get("game:background:mountain_snow"), x, yy, 270 * scale, h * scale);
+		sb.draw(Resources.get("game:background:mountain_back"), x, yy,
+				270 * scale, h * scale);
+		sb.draw(Resources.get("game:background:mountain_front"), x, yy,
+				270 * scale, h * scale);
+		sb.draw(Resources.get("game:background:mountain_grass_1"), x, yy,
+				270 * scale, h * scale);
+		sb.draw(Resources.get("game:background:mountain_grass_2"), x, yy,
+				270 * scale, h * scale);
+		sb.draw(Resources.get("game:background:mountain_snow"), x, yy,
+				270 * scale, h * scale);
 
 		ww = (int) (w / (270 * scale));
 		for (int i = -ww / 2 - 1; i < ww / 2 + 2; i++) {
 			float xx = -135 * scale + i * 270 * scale;
 			float yyy = -240 - y / backgroundSpeed / 1.5f;
-			sb.draw(Resources.get("game:background:mountain_small_clouds"), xx, yyy, 270 * scale, h * scale);
-			sb.draw(Resources.get("game:background:mountain_grass_3"), xx, yyy, 270 * scale, h * scale);
-			sb.draw(Resources.get("game:background:mountain_clouds"), xx, yyy, 270 * scale, h * scale);
+			sb.draw(Resources.get("game:background:mountain_small_clouds"), xx,
+					yyy, 270 * scale, h * scale);
+			sb.draw(Resources.get("game:background:mountain_grass_3"), xx, yyy,
+					270 * scale, h * scale);
+			sb.draw(Resources.get("game:background:mountain_clouds"), xx, yyy,
+					270 * scale, h * scale);
 			bitFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 		}
@@ -146,10 +170,18 @@ public class Game extends Screen {
 			// sb.draw(Resources.get("game:background:sky_3"), -270 * scale / 2
 			// + i * 270 * scale + offsetValues[1], -h / 2 - y /
 			// backgroundSpeed, 270 * scale, h * scale);
-			sb.draw(Resources.get("game:background:trees_back"), -270 * scale / 2 + i * 270 * scale + offsetValues[2], -h / 2 - y / backgroundSpeed, 270 * scale, h * scale);
-			sb.draw(Resources.get("game:background:trees_1"), -270 * scale / 2 + i * 270 * scale + offsetValues[3], -h / 2 - y / backgroundSpeed, 270 * scale, h * scale);
-			sb.draw(Resources.get("game:background:trees_2"), -270 * scale / 2 + i * 270 * scale + offsetValues[4], -h / 2 - y / backgroundSpeed, 270 * scale, h * scale);
-			sb.draw(Resources.get("game:background:trees_3"), -270 * scale / 2 + i * 270 * scale + offsetValues[5], -h / 2 - y / backgroundSpeed, 270 * scale, h * scale);
+			sb.draw(Resources.get("game:background:trees_back"), -270 * scale
+					/ 2 + i * 270 * scale + offsetValues[2], -h / 2 - y
+					/ backgroundSpeed, 270 * scale, h * scale);
+			sb.draw(Resources.get("game:background:trees_1"), -270 * scale / 2
+					+ i * 270 * scale + offsetValues[3], -h / 2 - y
+					/ backgroundSpeed, 270 * scale, h * scale);
+			sb.draw(Resources.get("game:background:trees_2"), -270 * scale / 2
+					+ i * 270 * scale + offsetValues[4], -h / 2 - y
+					/ backgroundSpeed, 270 * scale, h * scale);
+			sb.draw(Resources.get("game:background:trees_3"), -270 * scale / 2
+					+ i * 270 * scale + offsetValues[5], -h / 2 - y
+					/ backgroundSpeed, 270 * scale, h * scale);
 		}
 
 		// scale = 2;
@@ -168,14 +200,20 @@ public class Game extends Screen {
 		// bottom left of the sprite but centered on the screen.
 		// now we got it centered on the screen
 
-		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f, -240 - bambooLooping, 21, 480);
-		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f, 240 - bambooLooping, 21, 480);
+		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f, -240
+				- bambooLooping, 21, 480);
+		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f,
+				240 - bambooLooping, 21, 480);
 
-		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f - SpacePanda.WIDTH * 1 / 3, -240 - bambooLooping, 21, 480);
-		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f - SpacePanda.WIDTH * 1 / 3, 240 - bambooLooping, 21, 480);
+		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f
+				- SpacePanda.WIDTH * 1 / 3, -240 - bambooLooping, 21, 480);
+		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f
+				- SpacePanda.WIDTH * 1 / 3, 240 - bambooLooping, 21, 480);
 
-		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f + SpacePanda.WIDTH * 1 / 3, -240 - bambooLooping, 21, 480);
-		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f + SpacePanda.WIDTH * 1 / 3, 240 - bambooLooping, 21, 480);
+		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f
+				+ SpacePanda.WIDTH * 1 / 3, -240 - bambooLooping, 21, 480);
+		sb.draw(Resources.get("game:object:bamboo_1"), -13.5f
+				+ SpacePanda.WIDTH * 1 / 3, 240 - bambooLooping, 21, 480);
 
 		panda.spot = 0;
 		if (Input.isTouched()) {
@@ -187,7 +225,6 @@ public class Game extends Screen {
 		}
 
 		// if (Input.isTouched() && !b) {
-		// b = true;
 		// if (Input.getX() > 0) {
 		// if (panda.spot < 1)
 		// panda.spot++;
@@ -205,13 +242,13 @@ public class Game extends Screen {
 		bitFont.setColor(Color.YELLOW);
 		bitFont.draw(sb, s, 0 - l.width / 2, 230 - 10);
 
-		
 		ObstacleSpawner.update(delta);
 		EntityHandler.render(sb, delta);
 
+		// System.out.println(score);
 		sb.end();
 
-	}
+	} // b = true;
 
 	// Boolean to toggle the touch.
 	boolean b = false;

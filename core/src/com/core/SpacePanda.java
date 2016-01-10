@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.core.game.Game;
+import com.core.game.GameOver;
 import com.core.graphics.ScreenManager;
 import com.core.resources.Resources;
 
@@ -17,6 +18,8 @@ public class SpacePanda implements ApplicationListener {
 	public static final float SCALE = 4;
 	public static final float WIDTH = 1080 / SCALE; // This won\t change during the game so we use this.
 	public static final float HEIGHT = 1920 / SCALE;
+	
+	public int tester = 0;
 
 	public static Rectangle screenBounds = new Rectangle();
 	
@@ -33,9 +36,14 @@ public class SpacePanda implements ApplicationListener {
 		
 		Resources.load();
 
+		ScreenManager.add(new GameOver());
 		ScreenManager.add(new Game());
 
+		//just showing you the screen ive made
 		ScreenManager.setSelected("GAME");
+		
+		System.out.println(Game.getScore());
+		
 
 //		Gdx.input.setInputProcessor(new Input());
 	}
